@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.validate = exports.withoutOriginCheck = exports.withOriginCheck = void 0;
 const BEFORE = `
 window.addEventListener("message", function(event) {
 `;
@@ -148,4 +150,9 @@ if (template && template.update && template.update.length != 0) {
 exports.withOriginCheck = BEFORE + CHECK_ORIGIN + AFTER;
 exports.withoutOriginCheck = BEFORE + AFTER;
 exports.validate = VALIDATE;
+exports.default = {
+    withOriginCheck: exports.withOriginCheck,
+    withoutOriginCheck: exports.withoutOriginCheck,
+    validate: exports.validate,
+};
 //# sourceMappingURL=comms_js.js.map

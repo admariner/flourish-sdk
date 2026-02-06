@@ -26,7 +26,9 @@ function getLatestDataTimestamps(data_table_timestamps) {
     }
     return timestamps;
 }
-function extractData(data_binding, data_by_id, column_types_by_id, template_data_bindings, timestamps) {
+function extractData(data_binding, data_by_id, column_types_by_id, template_data_bindings, timestamps, 
+// data_rewriter should be a function that takes a AugmentedDataBinding and the parsed value and returns the modified value
+data_rewriter) {
     var columns = [];
     var data_table_ids = [];
     var num_rows = 0;
@@ -168,17 +170,16 @@ function extractData(data_binding, data_by_id, column_types_by_id, template_data
                 throw new Error(`BUG: 'key' was ${b.key} in ${b}`);
             }
             if ("columns" in b && b.columns != null) {
-                o[b.key] = b.columns
+                const parsed_values = b.columns
                     .filter(function (c) { return c < table[i + 1].length; })
                     .map(function (c) { return parse(b, c, table[i + 1][c]); });
+                o[b.key] = data_rewriter ? parsed_values.map(v => data_rewriter(b, v)) : parsed_values;
             }
             else if ("column" in b && b.column != null) {
-                if (b.column >= table[i + 1].length) {
-                    o[b.key] = parse(b, b.column, "");
-                }
-                else {
-                    o[b.key] = parse(b, b.column, table[i + 1][b.column]);
-                }
+                const parsed_value = b.column >= table[i + 1].length
+                    ? parse(b, b.column, "")
+                    : parse(b, b.column, table[i + 1][b.column]);
+                o[b.key] = data_rewriter ? data_rewriter(b, parsed_value) : parsed_value;
             }
         }
         dataset.push(o);

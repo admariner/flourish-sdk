@@ -1,7 +1,7 @@
 import "./polyfills";
 import { ColumnType, NullableColumnTypesById, DataBinding, DatasetType, TemplateDataBinding, KeyToTemplateDataBinding } from "./types";
 export { createInterpreter } from "@flourish/interpreter";
-type AugmentedDataBinding = DataBinding & {
+export type AugmentedDataBinding = DataBinding & {
     key?: string;
     template_data_binding?: TemplateDataBinding;
 };
@@ -18,7 +18,7 @@ export type DatasheetsTimestamps = {
 };
 export declare function extractData(data_binding: KeyToAugmentedDataBinding, data_by_id: {
     [data_table_id: string]: string[][] | undefined;
-}, column_types_by_id: NullableColumnTypesById, template_data_bindings: KeyToTemplateDataBinding | undefined, timestamps: DatasheetsTimestamps): DatasetType;
+}, column_types_by_id: NullableColumnTypesById, template_data_bindings: KeyToTemplateDataBinding | undefined, timestamps: DatasheetsTimestamps, data_rewriter?: (b: AugmentedDataBinding, value: unknown) => unknown): DatasetType;
 export declare function getColumnTypesForData(data: string[][]): ColumnType[];
 export declare function getRandomSeededSample(column: string[], sample_size: number): string[];
 export declare function mulberry32(seed: number): () => number;

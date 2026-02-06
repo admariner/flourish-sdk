@@ -38,6 +38,7 @@ export type TemplateDataBinding = {
         hints: Record<string, unknown>;
     };
     optional?: boolean;
+    cacheable_for_standalone_downloads?: boolean;
 } & ({
     column: string;
 } | {

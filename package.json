@@ -1,12 +1,12 @@
 {
   "name": "@flourish/sdk",
-  "version": "5.2.5",
+  "version": "5.2.6",
   "description": "The Flourish SDK",
   "module": "src/index.js",
   "scripts": {
     "prepare": "cd .. && make sdk_clean sdk",
     "test": "mocha --recursive",
-    "test:ci": "c8 -o coverage-sdk mocha --recursive --reporter json --reporter-option output=../test_reports/sdk.json"
+    "test:ci": "npx --yes c8 --reporter=lcov -o coverage-sdk npx --yes mocha --config .mocharc.ci.json"
   },
   "bin": {
     "flourish": "bin/flourish.js"
@@ -43,6 +43,8 @@
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "mocha-junit-reporter": "^2.2.1",
+    "mocha-multi-reporters": "^1.5.1",
     "d3-request": "^1.0.6",
     "mocha": "^10.4.0",
     "rollup": "^4.17.2",
@@ -51,7 +53,7 @@
     "tempy": "^3.1.0"
   },
   "engines": {
-    "node": "24.12.x",
-    "npm": "11.x"
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   }
 }

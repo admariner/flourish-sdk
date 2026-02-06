@@ -1,0 +1,6 @@
+{
+	"recursive": true,
+	"exit": true,
+	"reporter": "mocha-multi-reporters",
+	"reporter-options": "configFile=.mocha-reporters.json"
+}

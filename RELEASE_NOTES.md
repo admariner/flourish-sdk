@@ -1,3 +1,6 @@
+# 5.2.6
+* Relax Node.js engine requirement to >=18.0.0 for broader compatibility
+
 # 5.2.5
 * Update version of node to 24.12
 
