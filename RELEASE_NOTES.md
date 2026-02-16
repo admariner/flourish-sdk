@@ -1,3 +1,6 @@
+# 5.2.7
+* Fix CommonJS/ESM interop issue causing `index_html.render is not a function` error when running `flourish run` on templates
+
 # 5.2.6
 * Relax Node.js engine requirement to >=18.0.0 for broader compatibility
 
